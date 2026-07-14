@@ -47,7 +47,7 @@
 
     <!-- 图书网格 -->
     <div v-loading="bookStore.loading" class="book-grid-container">
-      <el-empty v-if="!bookStore.loading && bookStore.books.length === 0" description="未找到相关图书" />
+      <UiEmpty v-if="!bookStore.loading && bookStore.books.length === 0" description="未找到相关图书" />
       <div v-else class="book-grid">
         <BookCard v-for="book in bookStore.books" :key="book.id" :book="book" />
       </div>
@@ -63,7 +63,7 @@
 
     <!-- 分页 -->
     <div v-if="bookStore.total > 0" style="text-align: center; padding: 20px 0;">
-      <el-pagination
+      <UiPagination
         v-model:current-page="bookStore.filter.page"
         v-model:page-size="bookStore.filter.size"
         :total="bookStore.total"
@@ -83,8 +83,9 @@ import { Bell } from '@element-plus/icons-vue'
 import { useBookStore } from '@/stores/book'
 import { fetchBannersApi, fetchAnnouncementsApi, fetchRecommendApi } from '@/api/content'
 import type { Banner, Announcement, Book } from '@/types'
-import BookCard from '@/components/BookCard.vue'
-import SearchBar from '@/components/SearchBar.vue'
+import BookCard from '@/components/bookstore/BookCard.vue'
+import SearchBar from '@/components/bookstore/SearchBar.vue'
+import { UiPagination, UiEmpty } from '@bookstore/ui'
 
 const bookStore = useBookStore()
 const banners = ref<Banner[]>([])

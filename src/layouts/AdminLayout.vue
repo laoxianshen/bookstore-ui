@@ -52,10 +52,10 @@
           <span class="page-title">{{ pageTitle }}</span>
         </div>
         <div class="admin-header-right">
-          <el-button @click="$router.push('/')">
+          <UiButton @click="$router.push('/')">
             <el-icon><HomeFilled /></el-icon>
             返回前台
-          </el-button>
+          </UiButton>
           <el-dropdown>
             <span class="admin-user-info">
               <el-avatar :size="32">{{ authStore.user?.username?.[0] }}</el-avatar>
@@ -80,6 +80,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { Reading, DataAnalysis, Notebook, List, UserFilled, HomeFilled, PictureFilled, Bell, ChatLineSquare, Tickets } from '@element-plus/icons-vue'
 import { useAuthStore } from '@/stores/auth'
 import { ElMessage } from 'element-plus'
+import { UiButton } from '@bookstore/ui'
 
 const route = useRoute()
 const router = useRouter()

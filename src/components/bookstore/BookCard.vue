@@ -8,7 +8,7 @@
 
 <template>
   <!-- 点击卡片进入图书详情 -->
-  <el-card class="book-card" shadow="hover" @click="$router.push(`/books/${book.id}`)">
+  <UiCard class="book-card" shadow="hover" @click="$router.push(`/books/${book.id}`)">
     <!-- 封面图 -->
     <div class="book-cover">
       <img :src="imgSrc" :alt="book.title" @error="onError" />
@@ -23,7 +23,7 @@
       <!-- 分类标签 -->
       <div class="book-meta">
         <span class="book-category">
-          <el-tag size="small" type="info">{{ book.categoryName }}</el-tag>
+          <UiTag size="small" type="info">{{ book.categoryName }}</UiTag>
         </span>
       </div>
 
@@ -39,7 +39,7 @@
       <div class="book-stock out-of-stock" v-else>暂时缺货</div>
 
       <!-- 加入购物车按钮（.stop 阻止冒泡到卡片点击） -->
-      <el-button
+      <UiButton
         type="primary"
         class="add-cart-btn"
         :disabled="book.stock === 0"
@@ -47,9 +47,9 @@
       >
         <el-icon><ShoppingCartFull /></el-icon>
         加入购物车
-      </el-button>
+      </UiButton>
     </div>
-  </el-card>
+  </UiCard>
 </template>
 
 <script setup lang="ts">
@@ -60,6 +60,7 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { ShoppingCartFull } from '@element-plus/icons-vue'
 import { useCoverImage } from '@/composables/useCoverImage'
+import { UiButton, UiCard, UiTag } from '@bookstore/ui'
 
 const props = defineProps<{
   /** 图书实体 */

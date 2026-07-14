@@ -17,9 +17,9 @@
         <el-checkbox v-model="selectAll" @change="handleSelectAll" :indeterminate="isIndeterminate">
           全选（{{ selectedIds.size }}/{{ cartStore.items.length }}）
         </el-checkbox>
-        <el-button type="danger" size="small" :disabled="selectedIds.size === 0" @click="handleBatchRemove">
+        <UiButton type="danger" size="small" :disabled="selectedIds.size === 0" @click="handleBatchRemove">
           批量删除
-        </el-button>
+        </UiButton>
       </div>
 
       <div class="cart-list">
@@ -44,7 +44,7 @@
           </div>
           <div class="col-subtotal">¥{{ Number(item.subtotal).toFixed(2) }}</div>
           <div class="col-action">
-            <el-button type="danger" link @click="handleRemove(item.id)">删除</el-button>
+            <UiButton type="danger" link @click="handleRemove(item.id)">删除</UiButton>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@
       <!-- 底部结算栏 -->
       <div class="cart-footer">
         <div class="footer-left">
-          <el-button @click="handleClear">清空购物车</el-button>
+          <UiButton @click="handleClear">清空购物车</UiButton>
         </div>
         <div class="footer-right">
           <span class="total-text">
@@ -69,27 +69,27 @@
             <span class="total-price">¥{{ (cartStore.totalPrice - discount).toFixed(2) }}</span>
             <span v-if="discount > 0" class="original-price">（原价 ¥{{ cartStore.totalPrice.toFixed(2) }}）</span>
           </span>
-          <el-button type="primary" size="large" @click="showAddressDialog = true">去结算</el-button>
+          <UiButton type="primary" size="large" @click="showAddressDialog = true">去结算</UiButton>
         </div>
       </div>
     </div>
 
-    <el-empty v-else description="购物车是空的">
-      <el-button type="primary" @click="$router.push('/')">去逛逛</el-button>
-    </el-empty>
+    <UiEmpty v-else description="购物车是空的">
+      <UiButton type="primary" @click="$router.push('/')">去逛逛</UiButton>
+    </UiEmpty>
 
     <!-- 收货地址弹窗 -->
-    <el-dialog v-model="showAddressDialog" title="填写收货地址" width="500px">
+    <UiDialog v-model="showAddressDialog" title="填写收货地址" width="500px">
       <el-form ref="addressRef" :model="address" :rules="addressRules" label-width="100px">
         <el-form-item label="收货人" prop="receiverName"><el-input v-model="address.receiverName" /></el-form-item>
         <el-form-item label="手机号" prop="receiverPhone"><el-input v-model="address.receiverPhone" /></el-form-item>
         <el-form-item label="收货地址" prop="receiverAddress"><el-input v-model="address.receiverAddress" type="textarea" :rows="3" /></el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="showAddressDialog = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmitOrder" :loading="submitting">确认下单</el-button>
+        <UiButton @click="showAddressDialog = false">取消</UiButton>
+        <UiButton type="primary" @click="handleSubmitOrder" :loading="submitting">确认下单</UiButton>
       </template>
-    </el-dialog>
+    </UiDialog>
 
     <!-- 猜你喜欢 -->
     <div v-if="recommendBooks.length > 0" class="recommend-section">
@@ -110,7 +110,8 @@ import { fetchAvailableCouponsApi, calculateOrderApi, fetchRecommendApi } from '
 import type { FormInstance, FormRules } from 'element-plus'
 import type { Coupon, Book } from '@/types'
 import { ElMessage } from 'element-plus'
-import BookCard from '@/components/BookCard.vue'
+import BookCard from '@/components/bookstore/BookCard.vue'
+import { UiButton, UiDialog, UiEmpty } from '@bookstore/ui'
 
 const router = useRouter()
 const cartStore = useCartStore()

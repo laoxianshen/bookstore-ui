@@ -18,6 +18,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@bookstore/ui': resolve(__dirname, 'packages/ui/src'),
     },
   },
   server: {

@@ -9,30 +9,30 @@
   <div class="manage-page">
     <div class="page-toolbar">
       <h3>公告管理</h3>
-      <el-button type="primary" @click="openDialog(null)"><el-icon><Plus /></el-icon> 发布公告</el-button>
+      <UiButton type="primary" @click="openDialog(null)"><el-icon><Plus /></el-icon> 发布公告</UiButton>
     </div>
 
-    <el-card>
-      <el-table :data="list" stripe>
+    <UiCard>
+      <UiTable :data="list" stripe>
         <el-table-column prop="id" label="ID" width="60" />
         <el-table-column prop="title" label="标题" min-width="180" show-overflow-tooltip />
         <el-table-column label="状态" width="80">
           <template #default="{ row }">
-            <el-tag :type="row.status === 1 ? 'success' : 'info'" size="small">{{ row.status === 1 ? '已发布' : '草稿' }}</el-tag>
+            <UiTag :type="row.status === 1 ? 'success' : 'info'" size="small">{{ row.status === 1 ? '已发布' : '草稿' }}</UiTag>
           </template>
         </el-table-column>
         <el-table-column prop="createTime" label="时间" width="160" />
         <el-table-column label="操作" width="140">
           <template #default="{ row }">
-            <el-button type="primary" link @click="openDialog(row)">编辑</el-button>
-            <el-button type="danger" link @click="handleDelete(row.id)">删除</el-button>
+            <UiButton type="primary" link @click="openDialog(row)">编辑</UiButton>
+            <UiButton type="danger" link @click="handleDelete(row.id)">删除</UiButton>
           </template>
         </el-table-column>
-      </el-table>
+      </UiTable>
       <pagination :total="total" v-model:page="page" v-model:page-size="pageSize" />
-    </el-card>
+    </UiCard>
 
-    <el-dialog v-model="showDialog" :title="editing ? '编辑公告' : '发布公告'" width="600px">
+    <UiDialog v-model="showDialog" :title="editing ? '编辑公告' : '发布公告'" width="600px">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="标题" prop="title"><el-input v-model="form.title" /></el-form-item>
         <el-form-item label="内容" prop="content"><el-input v-model="form.content" type="textarea" :rows="6" /></el-form-item>
@@ -41,10 +41,10 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="showDialog = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">保存</el-button>
+        <UiButton @click="showDialog = false">取消</UiButton>
+        <UiButton type="primary" @click="handleSubmit">保存</UiButton>
       </template>
-    </el-dialog>
+    </UiDialog>
   </div>
 </template>
 
@@ -55,6 +55,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 import { fetchAdminAnnouncementsApi, createAnnouncementApi, updateAnnouncementApi, deleteAnnouncementApi } from '@/api/content'
 import type { Announcement } from '@/types'
+import { UiButton, UiTable, UiDialog, UiCard, UiTag } from '@bookstore/ui'
 
 const list = ref<Announcement[]>([])
 const total = ref(0)

@@ -11,9 +11,9 @@
     <div v-if="books.length > 0" class="book-grid">
       <BookCard v-for="book in books" :key="book.id" :book="book" />
     </div>
-    <el-empty v-else description="还没有收藏任何图书">
-      <el-button type="primary" @click="$router.push('/')">去逛逛</el-button>
-    </el-empty>
+    <UiEmpty v-else description="还没有收藏任何图书">
+      <UiButton type="primary" @click="$router.push('/')">去逛逛</UiButton>
+    </UiEmpty>
   </div>
 </template>
 
@@ -21,7 +21,8 @@
 import { ref, onMounted } from 'vue'
 import { fetchFavoritesApi } from '@/api/content'
 import type { Book } from '@/types'
-import BookCard from '@/components/BookCard.vue'
+import BookCard from '@/components/bookstore/BookCard.vue'
+import { UiButton, UiEmpty } from '@bookstore/ui'
 
 const books = ref<Book[]>([])
 

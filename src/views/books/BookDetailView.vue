@@ -24,7 +24,7 @@
           <span class="meta-item">ISBN：{{ book.isbn }}</span>
           <span class="meta-item">上架时间：{{ book.createTime }}</span>
         </div>
-        <el-tag>{{ book.categoryName }}</el-tag>
+        <UiTag>{{ book.categoryName }}</UiTag>
 
         <!-- 价格 -->
         <div class="price-row">
@@ -50,15 +50,15 @@
             :disabled="book.stock === 0"
             size="large"
           />
-          <el-button type="primary" size="large" :disabled="book.stock === 0" @click="handleAddToCart">
+          <UiButton type="primary" size="large" :disabled="book.stock === 0" @click="handleAddToCart">
             <el-icon><ShoppingCartFull /></el-icon> 加入购物车
-          </el-button>
-          <el-button type="success" size="large" :disabled="book.stock === 0" @click="handleBuyNow">
+          </UiButton>
+          <UiButton type="success" size="large" :disabled="book.stock === 0" @click="handleBuyNow">
             <el-icon><Lightning /></el-icon> 立即购买
-          </el-button>
-          <el-button :type="isFavorited ? 'warning' : 'info'" size="large" @click="toggleFavorite">
+          </UiButton>
+          <UiButton :type="isFavorited ? 'warning' : 'info'" size="large" @click="toggleFavorite">
             <el-icon><Star /></el-icon> {{ isFavorited ? '已收藏' : '收藏' }}
-          </el-button>
+          </UiButton>
         </div>
 
         <!-- 图书简介 -->
@@ -69,21 +69,21 @@
       </div>
     </div>
 
-    <el-empty v-else-if="!loading" description="图书不存在" />
+    <UiEmpty v-else-if="!loading" description="图书不存在" />
 
     <!-- 评价区域 -->
     <div v-if="book" class="reviews-section">
       <div class="reviews-header">
         <h3>图书评价 ({{ reviewTotal }})</h3>
-        <el-button v-if="authStore.isLoggedIn" type="primary" size="small" @click="showReviewForm = true">写评价</el-button>
+        <UiButton v-if="authStore.isLoggedIn" type="primary" size="small" @click="showReviewForm = true">写评价</UiButton>
       </div>
 
       <!-- 发表评价 -->
       <div v-if="showReviewForm" class="review-form">
         <el-rate v-model="reviewForm.rating" show-text />
         <el-input v-model="reviewForm.content" type="textarea" :rows="3" placeholder="分享你的阅读体验..." style="margin:8px 0" />
-        <el-button type="primary" size="small" @click="handleSubmitReview" :loading="submittingReview">提交评价</el-button>
-        <el-button size="small" @click="showReviewForm = false">取消</el-button>
+        <UiButton type="primary" size="small" @click="handleSubmitReview" :loading="submittingReview">提交评价</UiButton>
+        <UiButton size="small" @click="showReviewForm = false">取消</UiButton>
       </div>
 
       <!-- 评价筛选 -->
@@ -106,7 +106,7 @@
           <p class="review-content">{{ r.content }}</p>
         </div>
       </div>
-      <el-empty v-else description="暂无评价" :image-size="60" />
+      <UiEmpty v-else description="暂无评价" :image-size="60" />
     </div>
 
     <!-- 猜你喜欢 -->
@@ -129,6 +129,7 @@ import { useAuthStore } from '@/stores/auth'
 import { fetchBookReviewsApi, fetchFilteredReviewsApi, submitReviewApi, checkFavoriteApi, addFavoriteApi, removeFavoriteApi, fetchRecommendApi, trackViewApi } from '@/api/content'
 import { ElMessage } from 'element-plus'
 import type { Book, Review } from '@/types'
+import { UiButton, UiTag, UiEmpty } from '@bookstore/ui'
 
 const route = useRoute()
 const router = useRouter()

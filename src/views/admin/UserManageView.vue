@@ -15,8 +15,8 @@
   <div class="user-manage-page">
     <h3>用户管理</h3>
 
-    <el-card>
-      <el-table :data="users" v-loading="loading" stripe>
+    <UiCard>
+      <UiTable :data="users" v-loading="loading" stripe>
         <el-table-column prop="id" label="ID" width="60" />
         <el-table-column prop="username" label="用户名" width="120" />
         <el-table-column prop="email" label="邮箱" min-width="180" />
@@ -25,18 +25,18 @@
         <!-- 角色标签：管理员=红色，普通用户=灰色 -->
         <el-table-column label="角色" width="100">
           <template #default="{ row }">
-            <el-tag :type="row.role === 1 ? 'danger' : 'info'" size="small">
+            <UiTag :type="row.role === 1 ? 'danger' : 'info'" size="small">
               {{ row.role === 1 ? '管理员' : '普通用户' }}
-            </el-tag>
+            </UiTag>
           </template>
         </el-table-column>
 
         <!-- 状态标签：正常=绿色，禁用=红色 -->
         <el-table-column label="状态" width="80">
           <template #default="{ row }">
-            <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
+            <UiTag :type="row.status === 1 ? 'success' : 'danger'" size="small">
               {{ row.status === 1 ? '正常' : '禁用' }}
-            </el-tag>
+            </UiTag>
           </template>
         </el-table-column>
 
@@ -45,21 +45,21 @@
         <!-- 操作：启用/禁用（admin 账号不可操作） -->
         <el-table-column label="操作" width="120" fixed="right">
           <template #default="{ row }">
-            <el-button
+            <UiButton
               type="primary"
               link
               @click="handleToggleStatus(row)"
               :disabled="row.id === 1"  <!-- 保护默认管理员 -->
             >
               {{ row.status === 1 ? '禁用' : '启用' }}
-            </el-button>
+            </UiButton>
           </template>
         </el-table-column>
-      </el-table>
+      </UiTable>
 
       <!-- 分页 -->
       <div style="text-align: center; padding: 20px 0;" v-if="total > 0">
-        <el-pagination
+        <UiPagination
           v-model:current-page="page"
           v-model:page-size="pageSize"
           :total="total"
@@ -70,7 +70,7 @@
           @size-change="loadUsers"
         />
       </div>
-    </el-card>
+    </UiCard>
   </div>
 </template>
 
@@ -78,6 +78,7 @@
 import { ref, onMounted } from 'vue'
 import { fetchUsersApi, updateUserStatusApi } from '@/api/dashboard'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { UiButton, UiTable, UiCard, UiTag, UiPagination } from '@bookstore/ui'
 
 const users = ref<any[]>([])
 const loading = ref(false)

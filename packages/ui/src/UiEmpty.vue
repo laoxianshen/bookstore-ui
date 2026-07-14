@@ -1,0 +1,19 @@
+<!--
+  UI 空状态组件 — 封装 el-empty
+  统一 description、image-size
+-->
+<template>
+  <el-empty :description="description" :image-size="imageSize">
+    <slot />
+  </el-empty>
+</template>
+
+<script setup lang="ts">
+withDefaults(defineProps<{
+  description?: string
+  imageSize?: number
+}>(), {
+  description: '暂无数据',
+  imageSize: 80,
+})
+</script>

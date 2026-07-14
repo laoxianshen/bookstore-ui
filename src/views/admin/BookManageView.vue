@@ -17,14 +17,14 @@
     <!-- 工具栏 -->
     <div class="page-toolbar">
       <h3>图书管理</h3>
-      <el-button type="primary" @click="openCreateDialog">
+      <UiButton type="primary" @click="openCreateDialog">
         <el-icon><Plus /></el-icon> 新增图书
-      </el-button>
+      </UiButton>
     </div>
 
     <!-- 图书表格 -->
-    <el-card>
-      <el-table :data="bookStore.books" v-loading="bookStore.loading" stripe>
+    <UiCard>
+      <UiTable :data="bookStore.books" v-loading="bookStore.loading" stripe>
         <el-table-column prop="id" label="ID" width="60" />
         <el-table-column label="封面" width="80">
           <template #default="{ row }">
@@ -35,7 +35,7 @@
         <el-table-column prop="author" label="作者" width="100" />
         <el-table-column prop="categoryName" label="分类" width="100">
           <template #default="{ row }">
-            <el-tag size="small">{{ row.categoryName }}</el-tag>
+            <UiTag size="small">{{ row.categoryName }}</UiTag>
           </template>
         </el-table-column>
         <el-table-column label="售价" width="80">
@@ -44,15 +44,15 @@
         <el-table-column prop="stock" label="库存" width="70" />
         <el-table-column label="操作" width="160" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" link @click="openEditDialog(row)">编辑</el-button>
-            <el-button type="danger" link @click="handleDelete(row.id)">删除</el-button>
+            <UiButton type="primary" link @click="openEditDialog(row)">编辑</UiButton>
+            <UiButton type="danger" link @click="handleDelete(row.id)">删除</UiButton>
           </template>
         </el-table-column>
-      </el-table>
+      </UiTable>
 
       <!-- 分页 -->
       <div style="text-align: center; padding: 20px 0;" v-if="bookStore.total > 0">
-        <el-pagination
+        <UiPagination
           v-model:current-page="bookStore.filter.page"
           v-model:page-size="bookStore.filter.size"
           :total="bookStore.total"
@@ -63,7 +63,7 @@
           @size-change="loadBooks"
         />
       </div>
-    </el-card>
+    </UiCard>
 
     <!-- 新增/编辑弹窗 -->
     <BookForm v-model="showFormDialog" :book="editingBook" :categories="bookStore.categories" @submit="handleFormSubmit" />
@@ -76,7 +76,8 @@ import { Plus } from '@element-plus/icons-vue'
 import { useBookStore } from '@/stores/book'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { Book } from '@/types'
-import BookForm from '@/components/BookForm.vue'
+import BookForm from '@/components/bookstore/BookForm.vue'
+import { UiButton, UiTable, UiCard, UiTag, UiPagination } from '@bookstore/ui'
 
 const bookStore = useBookStore()
 

@@ -25,9 +25,9 @@
           <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password :prefix-icon="Lock" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="submit-btn" @click="handleLogin" :loading="loading">
+          <UiButton type="primary" class="submit-btn" @click="handleLogin" :loading="loading">
             登录
-          </el-button>
+          </UiButton>
         </el-form-item>
       </el-form>
 
@@ -53,6 +53,7 @@ import { useAuthStore } from '@/stores/auth'
 import { usernameRules, passwordRules } from '@/utils/validators'
 import type { FormInstance } from 'element-plus'
 import { ElMessage } from 'element-plus'
+import { UiButton } from '@bookstore/ui'
 
 const router = useRouter()
 const authStore = useAuthStore()

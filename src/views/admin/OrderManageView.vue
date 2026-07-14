@@ -14,8 +14,8 @@
   <div class="order-manage-page">
     <h3>订单管理</h3>
 
-    <el-card>
-      <el-table :data="orderStore.allOrders" stripe>
+    <UiCard>
+      <UiTable :data="orderStore.allOrders" stripe>
         <el-table-column prop="id" label="ID" width="60" />
         <el-table-column prop="orderNo" label="订单号" width="180" show-overflow-tooltip />
         <el-table-column prop="username" label="用户" width="100" />
@@ -25,7 +25,7 @@
         <!-- 状态标签 -->
         <el-table-column label="状态" width="100">
           <template #default="{ row }">
-            <el-tag :type="OrderStatusTypeMap[row.status] || 'info'">{{ OrderStatusMap[row.status] }}</el-tag>
+            <UiTag :type="OrderStatusTypeMap[row.status] || 'info'">{{ OrderStatusMap[row.status] }}</UiTag>
           </template>
         </el-table-column>
         <!-- 收货信息 -->
@@ -54,11 +54,11 @@
             </el-select>
           </template>
         </el-table-column>
-      </el-table>
+      </UiTable>
 
       <!-- 分页 -->
       <div style="text-align: center; padding: 20px 0;" v-if="orderStore.total > 0">
-        <el-pagination
+        <UiPagination
           v-model:current-page="page"
           v-model:page-size="pageSize"
           :total="orderStore.total"
@@ -69,7 +69,7 @@
           @size-change="loadOrders"
         />
       </div>
-    </el-card>
+    </UiCard>
   </div>
 </template>
 
@@ -78,6 +78,7 @@ import { ref, onMounted } from 'vue'
 import { useOrderStore } from '@/stores/order'
 import { OrderStatusMap, OrderStatusTypeMap } from '@/types'
 import { ElMessage } from 'element-plus'
+import { UiTable, UiCard, UiTag, UiPagination } from '@bookstore/ui'
 
 const orderStore = useOrderStore()
 const page = ref(1)

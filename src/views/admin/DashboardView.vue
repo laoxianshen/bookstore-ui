@@ -24,27 +24,27 @@
     <!-- 图表行 -->
     <el-row :gutter="20" style="margin-top: 20px;">
       <el-col :span="16">
-        <el-card class="chart-card">
+        <UiCard class="chart-card">
           <template #header><span>近30天销售趋势</span></template>
           <!-- ECharts 折线图：销售额 + 订单数双Y轴 -->
           <v-chart :option="salesTrendOption" style="height: 350px;" autoresize />
-        </el-card>
+        </UiCard>
       </el-col>
       <el-col :span="8">
-        <el-card class="chart-card">
+        <UiCard class="chart-card">
           <template #header><span>图书分类分布</span></template>
           <!-- ECharts 环形饼图：各分类占比 -->
           <v-chart :option="categoryOption" style="height: 350px;" autoresize />
-        </el-card>
+        </UiCard>
       </el-col>
     </el-row>
 
     <!-- 最近订单表格 -->
     <el-row :gutter="20" style="margin-top: 20px;">
       <el-col :span="24">
-        <el-card class="table-card">
+        <UiCard class="table-card">
           <template #header><span>最近订单</span></template>
-          <el-table :data="dashboard.recentOrders" size="small" max-height="400">
+          <UiTable :data="dashboard.recentOrders" size="small" max-height="400">
             <el-table-column prop="id" label="订单ID" width="80" />
             <el-table-column prop="username" label="用户" width="100" />
             <el-table-column label="金额" width="100">
@@ -52,12 +52,12 @@
             </el-table-column>
             <el-table-column prop="status" label="状态" width="100">
               <template #default="{ row }">
-                <el-tag size="small">{{ row.status }}</el-tag>
+                <UiTag size="small">{{ row.status }}</UiTag>
               </template>
             </el-table-column>
             <el-table-column prop="createdAt" label="时间" min-width="160" />
-          </el-table>
-        </el-card>
+          </UiTable>
+        </UiCard>
       </el-col>
     </el-row>
   </div>
@@ -68,7 +68,7 @@ import { ref, computed, onMounted } from 'vue'
 import { Notebook, ShoppingCartFull, UserFilled, Money } from '@element-plus/icons-vue'
 import { fetchDashboardDataApi } from '@/api/dashboard'
 import type { DashboardData } from '@/types'
-import StatCard from '@/components/StatCard.vue'
+import StatCard from '@/components/bookstore/StatCard.vue'
 
 // ECharts 按需引入（减小打包体积）
 import VChart from 'vue-echarts'
@@ -76,6 +76,7 @@ import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { LineChart, PieChart } from 'echarts/charts'
 import { TitleComponent, TooltipComponent, LegendComponent, GridComponent } from 'echarts/components'
+import { UiTable, UiCard, UiTag } from '@bookstore/ui'
 
 use([CanvasRenderer, LineChart, PieChart, TitleComponent, TooltipComponent, LegendComponent, GridComponent])
 

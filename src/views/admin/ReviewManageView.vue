@@ -8,8 +8,8 @@
 <template>
   <div class="manage-page">
     <h3>评价管理</h3>
-    <el-card style="margin-top:16px">
-      <el-table :data="list" stripe>
+    <UiCard style="margin-top:16px">
+      <UiTable :data="list" stripe>
         <el-table-column prop="id" label="ID" width="60" />
         <el-table-column prop="bookTitle" label="图书" width="150" show-overflow-tooltip />
         <el-table-column prop="username" label="用户" width="100" />
@@ -19,22 +19,22 @@
         <el-table-column prop="content" label="内容" min-width="200" show-overflow-tooltip />
         <el-table-column label="状态" width="90">
           <template #default="{ row }">
-            <el-tag :type="row.status === 1 ? 'success' : row.status === 2 ? 'danger' : 'warning'" size="small">
+            <UiTag :type="row.status === 1 ? 'success' : row.status === 2 ? 'danger' : 'warning'" size="small">
               {{ row.status === 1 ? '已通过' : row.status === 2 ? '已拒绝' : '待审核' }}
-            </el-tag>
+            </UiTag>
           </template>
         </el-table-column>
         <el-table-column prop="createTime" label="时间" width="160" />
         <el-table-column label="操作" width="200">
           <template #default="{ row }">
-            <el-button v-if="row.status !== 1" type="success" link @click="approve(row.id)">通过</el-button>
-            <el-button v-if="row.status !== 2" type="warning" link @click="reject(row.id)">拒绝</el-button>
-            <el-button type="danger" link @click="handleDelete(row.id)">删除</el-button>
+            <UiButton v-if="row.status !== 1" type="success" link @click="approve(row.id)">通过</UiButton>
+            <UiButton v-if="row.status !== 2" type="warning" link @click="reject(row.id)">拒绝</UiButton>
+            <UiButton type="danger" link @click="handleDelete(row.id)">删除</UiButton>
           </template>
         </el-table-column>
-      </el-table>
+      </UiTable>
       <pagination :total="total" v-model:page="page" v-model:page-size="pageSize" />
-    </el-card>
+    </UiCard>
   </div>
 </template>
 
@@ -43,6 +43,7 @@ import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { fetchAdminReviewsApi, approveReviewApi, rejectReviewApi, deleteReviewApi } from '@/api/content'
 import type { Review } from '@/types'
+import { UiButton, UiTable, UiCard, UiTag } from '@bookstore/ui'
 
 const list = ref<Review[]>([])
 const total = ref(0)

@@ -11,8 +11,8 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    BookCard: typeof import('./src/components/BookCard.vue')['default']
-    BookForm: typeof import('./src/components/BookForm.vue')['default']
+    BookCard: typeof import('./src/components/bookstore/BookCard.vue')['default']
+    BookForm: typeof import('./src/components/bookstore/BookForm.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
@@ -53,11 +53,11 @@ declare module 'vue' {
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
-    Pagination: typeof import('./src/components/Pagination.vue')['default']
+    Pagination: typeof import('./src/components/bookstore/Pagination.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SearchBar: typeof import('./src/components/SearchBar.vue')['default']
-    StatCard: typeof import('./src/components/StatCard.vue')['default']
+    SearchBar: typeof import('./src/components/bookstore/SearchBar.vue')['default']
+    StatCard: typeof import('./src/components/bookstore/StatCard.vue')['default']
   }
   export interface GlobalDirectives {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

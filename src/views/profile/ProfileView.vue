@@ -9,7 +9,7 @@
   <div class="profile-page">
     <h2>个人中心</h2>
 
-    <el-card class="profile-card">
+    <UiCard class="profile-card">
       <el-form :model="form" :rules="rules" label-width="100px" class="profile-form">
         <!-- 用户名（只读） -->
         <el-form-item label="用户名">
@@ -26,9 +26,9 @@
 
         <!-- 角色（只读） -->
         <el-form-item label="角色">
-          <el-tag :type="authStore.isAdmin ? 'danger' : 'info'">
+          <UiTag :type="authStore.isAdmin ? 'danger' : 'info'">
             {{ authStore.isAdmin ? '管理员' : '普通用户' }}
-          </el-tag>
+          </UiTag>
         </el-form-item>
 
         <!-- 注册时间（只读） -->
@@ -38,10 +38,10 @@
 
         <!-- 保存按钮 -->
         <el-form-item>
-          <el-button type="primary" @click="handleSave" :loading="saving">保存修改</el-button>
+          <UiButton type="primary" @click="handleSave" :loading="saving">保存修改</UiButton>
         </el-form-item>
       </el-form>
-    </el-card>
+    </UiCard>
   </div>
 </template>
 
@@ -51,6 +51,7 @@ import { useAuthStore } from '@/stores/auth'
 import { emailRules, phoneRules } from '@/utils/validators'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
+import { UiButton, UiCard, UiTag } from '@bookstore/ui'
 
 const authStore = useAuthStore()
 const saving = ref(false)

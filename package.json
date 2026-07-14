@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bookstore/ui": "file:./packages/ui",
     "axios": "^1.17.0",
     "echarts": "^6.1.0",
     "element-plus": "^2.14.2",

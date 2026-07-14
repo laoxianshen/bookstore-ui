@@ -34,9 +34,9 @@
           <el-input v-model="form.confirmPassword" type="password" placeholder="请再次输入密码" show-password :prefix-icon="Lock" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="submit-btn" @click="handleRegister" :loading="loading">
+          <UiButton type="primary" class="submit-btn" @click="handleRegister" :loading="loading">
             注册
-          </el-button>
+          </UiButton>
         </el-form-item>
       </el-form>
 
@@ -56,6 +56,7 @@ import { useAuthStore } from '@/stores/auth'
 import { usernameRules, passwordRules, emailRules, phoneRules } from '@/utils/validators'
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
+import { UiButton } from '@bookstore/ui'
 
 const router = useRouter()
 const authStore = useAuthStore()

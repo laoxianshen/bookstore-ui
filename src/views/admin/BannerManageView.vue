@@ -9,11 +9,11 @@
   <div class="manage-page">
     <div class="page-toolbar">
       <h3>轮播图管理</h3>
-      <el-button type="primary" @click="openDialog(null)"><el-icon><Plus /></el-icon> 新增轮播图</el-button>
+      <UiButton type="primary" @click="openDialog(null)"><el-icon><Plus /></el-icon> 新增轮播图</UiButton>
     </div>
 
-    <el-card>
-      <el-table :data="list" stripe>
+    <UiCard>
+      <UiTable :data="list" stripe>
         <el-table-column prop="id" label="ID" width="60" />
         <el-table-column label="图片" width="200">
           <template #default="{ row }">
@@ -24,20 +24,20 @@
         <el-table-column prop="sortOrder" label="排序" width="70" />
         <el-table-column label="状态" width="80">
           <template #default="{ row }">
-            <el-tag :type="row.status === 1 ? 'success' : 'info'" size="small">{{ row.status === 1 ? '启用' : '禁用' }}</el-tag>
+            <UiTag :type="row.status === 1 ? 'success' : 'info'" size="small">{{ row.status === 1 ? '启用' : '禁用' }}</UiTag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="140">
           <template #default="{ row }">
-            <el-button type="primary" link @click="openDialog(row)">编辑</el-button>
-            <el-button type="danger" link @click="handleDelete(row.id)">删除</el-button>
+            <UiButton type="primary" link @click="openDialog(row)">编辑</UiButton>
+            <UiButton type="danger" link @click="handleDelete(row.id)">删除</UiButton>
           </template>
         </el-table-column>
-      </el-table>
+      </UiTable>
       <pagination :total="total" v-model:page="page" v-model:page-size="pageSize" />
-    </el-card>
+    </UiCard>
 
-    <el-dialog v-model="showDialog" :title="editing ? '编辑轮播图' : '新增轮播图'" width="550px">
+    <UiDialog v-model="showDialog" :title="editing ? '编辑轮播图' : '新增轮播图'" width="550px">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="标题" prop="title"><el-input v-model="form.title" /></el-form-item>
         <el-form-item label="图片URL" prop="imageUrl"><el-input v-model="form.imageUrl" placeholder="https://..." /></el-form-item>
@@ -48,10 +48,10 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="showDialog = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">保存</el-button>
+        <UiButton @click="showDialog = false">取消</UiButton>
+        <UiButton type="primary" @click="handleSubmit">保存</UiButton>
       </template>
-    </el-dialog>
+    </UiDialog>
   </div>
 </template>
 
@@ -62,6 +62,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 import { fetchAdminBannersApi, createBannerApi, updateBannerApi, deleteBannerApi } from '@/api/content'
 import type { Banner } from '@/types'
+import { UiButton, UiTable, UiDialog, UiCard, UiTag } from '@bookstore/ui'
 
 const list = ref<Banner[]>([])
 const total = ref(0)

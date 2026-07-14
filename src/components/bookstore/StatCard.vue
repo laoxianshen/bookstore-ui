@@ -1,3 +1,4 @@
+import { UiCard } from '@bookstore/ui'
 <!--
   统计卡片组件
 
@@ -6,7 +7,7 @@
 -->
 
 <template>
-  <el-card class="stat-card" shadow="hover">
+  <UiCard class="stat-card" shadow="hover">
     <div class="stat-content">
       <!-- 图标区域 -->
       <div class="stat-icon" :style="{ background: color }">
@@ -26,7 +27,7 @@
         </div>
       </div>
     </div>
-  </el-card>
+  </UiCard>
 </template>
 
 <script setup lang="ts">

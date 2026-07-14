@@ -9,11 +9,11 @@
   <div class="manage-page">
     <div class="page-toolbar">
       <h3>优惠券管理</h3>
-      <el-button type="primary" @click="openDialog(null)"><el-icon><Plus /></el-icon> 新增优惠券</el-button>
+      <UiButton type="primary" @click="openDialog(null)"><el-icon><Plus /></el-icon> 新增优惠券</UiButton>
     </div>
 
-    <el-card>
-      <el-table :data="list" stripe>
+    <UiCard>
+      <UiTable :data="list" stripe>
         <el-table-column prop="id" label="ID" width="60" />
         <el-table-column prop="name" label="名称" min-width="160" />
         <el-table-column label="类型" width="80">
@@ -33,20 +33,20 @@
         </el-table-column>
         <el-table-column label="状态" width="70">
           <template #default="{ row }">
-            <el-tag :type="row.status === 1 ? 'success' : 'info'" size="small">{{ row.status === 1 ? '启用' : '禁用' }}</el-tag>
+            <UiTag :type="row.status === 1 ? 'success' : 'info'" size="small">{{ row.status === 1 ? '启用' : '禁用' }}</UiTag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="140">
           <template #default="{ row }">
-            <el-button type="primary" link @click="openDialog(row)">编辑</el-button>
-            <el-button type="danger" link @click="handleDelete(row.id)">删除</el-button>
+            <UiButton type="primary" link @click="openDialog(row)">编辑</UiButton>
+            <UiButton type="danger" link @click="handleDelete(row.id)">删除</UiButton>
           </template>
         </el-table-column>
-      </el-table>
+      </UiTable>
       <pagination :total="total" v-model:page="page" v-model:page-size="pageSize" />
-    </el-card>
+    </UiCard>
 
-    <el-dialog v-model="showDialog" :title="editing ? '编辑优惠券' : '新增优惠券'" width="550px">
+    <UiDialog v-model="showDialog" :title="editing ? '编辑优惠券' : '新增优惠券'" width="550px">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="名称" prop="name"><el-input v-model="form.name" /></el-form-item>
         <el-form-item label="类型" prop="type">
@@ -73,10 +73,10 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="showDialog = false">取消</el-button>
-        <el-button type="primary" @click="handleSubmit">保存</el-button>
+        <UiButton @click="showDialog = false">取消</UiButton>
+        <UiButton type="primary" @click="handleSubmit">保存</UiButton>
       </template>
-    </el-dialog>
+    </UiDialog>
   </div>
 </template>
 
@@ -87,6 +87,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 import { fetchAdminCouponsApi, createCouponApi, updateCouponApi, deleteCouponApi } from '@/api/content'
 import type { Coupon } from '@/types'
+import { UiButton, UiTable, UiDialog, UiCard, UiTag } from '@bookstore/ui'
 
 const list = ref<Coupon[]>([])
 const total = ref(0)

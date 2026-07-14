@@ -20,7 +20,7 @@
             <span class="order-id">订单号：{{ order.orderNo }}</span>
             <span class="order-time">{{ order.createTime }}</span>
           </div>
-          <el-tag :type="statusType(order.status)">{{ statusLabel(order.status) }}</el-tag>
+          <UiTag :type="statusType(order.status)">{{ statusLabel(order.status) }}</UiTag>
         </div>
 
         <!-- 订单商品明细 -->
@@ -42,11 +42,11 @@
           </div>
           <div class="order-actions">
             <!-- 待付款：取消订单 -->
-            <el-button v-if="order.status === 0" type="warning" size="small" @click="handleRefund(order.id)">取消订单</el-button>
+            <UiButton v-if="order.status === 0" type="warning" size="small" @click="handleRefund(order.id)">取消订单</UiButton>
             <!-- 已发货：确认收货 -->
-            <el-button v-if="order.status === 2" type="primary" size="small" @click="handleConfirm(order.id)">确认收货</el-button>
+            <UiButton v-if="order.status === 2" type="primary" size="small" @click="handleConfirm(order.id)">确认收货</UiButton>
             <!-- 已付款/已发货：申请退款 -->
-            <el-button v-if="order.status === 1 || order.status === 2" type="danger" size="small" plain @click="handleRefund(order.id)">申请退款</el-button>
+            <UiButton v-if="order.status === 1 || order.status === 2" type="danger" size="small" plain @click="handleRefund(order.id)">申请退款</UiButton>
             <span class="order-total" style="margin-left:16px">
               合计：<strong>¥{{ Number(order.totalAmount).toFixed(2) }}</strong>
             </span>
@@ -55,9 +55,9 @@
       </div>
     </div>
 
-    <el-empty v-else description="还没有订单">
-      <el-button type="primary" @click="$router.push('/')">去逛逛</el-button>
-    </el-empty>
+    <UiEmpty v-else description="还没有订单">
+      <UiButton type="primary" @click="$router.push('/')">去逛逛</UiButton>
+    </UiEmpty>
   </div>
 </template>
 
@@ -67,6 +67,7 @@ import { useOrderStore } from '@/stores/order'
 import { OrderStatusMap, OrderStatusTypeMap } from '@/types'
 import { confirmReceiptApi, requestRefundApi } from '@/api/content'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { UiButton, UiTag, UiEmpty } from '@bookstore/ui'
 
 const orderStore = useOrderStore()
 const orders = ref(orderStore.orders)

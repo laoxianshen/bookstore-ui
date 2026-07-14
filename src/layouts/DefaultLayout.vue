@@ -39,7 +39,7 @@
         <!-- 购物车角标 -->
         <router-link to="/cart" class="cart-link">
           <el-badge :value="cartCount" :hidden="cartCount === 0">
-            <el-button :icon="ShoppingCartFull" circle />
+            <UiButton :icon="ShoppingCartFull" circle />
           </el-badge>
         </router-link>
 
@@ -68,8 +68,8 @@
 
         <!-- 未登录 -->
         <template v-else>
-          <el-button @click="$router.push('/login')">登录</el-button>
-          <el-button type="primary" @click="$router.push('/register')">注册</el-button>
+          <UiButton @click="$router.push('/login')">登录</UiButton>
+          <UiButton type="primary" @click="$router.push('/register')">注册</UiButton>
         </template>
       </div>
     </el-header>
@@ -93,6 +93,7 @@ import { ShoppingCartFull, ArrowDown, Reading } from '@element-plus/icons-vue'
 import { useAuthStore } from '@/stores/auth'
 import { fetchCartCountApi } from '@/api/order'
 import { ElMessage } from 'element-plus'
+import { UiButton } from '@bookstore/ui'
 
 const route = useRoute()
 const router = useRouter()

@@ -1,0 +1,11 @@
+{
+  "name": "@bookstore/ui",
+  "version": "1.0.0",
+  "description": "Bookstore UI component library — Vue 3 wrapper on Element Plus",
+  "main": "src/index.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "element-plus": "*",
+    "vue": "^3.0.0"
+  }
+}
